@@ -15,8 +15,10 @@ provide("UserService", new UserService());
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/CreateUser">Create user</RouterLink>
+        <RouterLink to="/Login">Log In</RouterLink>
+        <RouterLink to="/Logout">Log Out</RouterLink>
 
-        <p>
+        <p v-if="userStore.userName != undefined">
           {{ "Logged in as: " + userStore.userName }}
         </p>
       </nav>

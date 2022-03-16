@@ -1,9 +1,9 @@
 <template>
   <h2>Create new user</h2>
   <br />
-  <input v-model="name" placeholder="Enter name" />
+  <input v-model="username" placeholder="Enter username" />
   <br />
-  <input v-model="email" placeholder="Enter email" />
+  <input v-model="password" placeholder="Enter password" />
   <br />
   <button @click="createUser">Create</button>
 </template>
@@ -13,11 +13,11 @@ import { inject, ref } from "vue";
 import { UserStore } from "@/stores/user";
 
 const userStore = UserStore();
-const name = ref("");
-const email = ref("");
+const username = ref("");
+const password = ref("");
 
 function createUser() {
-  userStore.create(name.value, email.value);
+  userStore.create(username.value, password.value);
 }
 </script>
 

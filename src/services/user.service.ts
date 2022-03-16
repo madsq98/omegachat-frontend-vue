@@ -2,10 +2,10 @@ import http from "./http.client";
 import type { User } from "@/core/user";
 
 export class UserService {
-  async createUser(name: string, email: string): Promise<User> {
+  async createUser(username: string, password: string): Promise<User> {
     const res = await http.post<User>("/users", {
-      name: name,
-      email: email,
+      username: username,
+      password: password
     });
     return res.data;
   }

@@ -9,22 +9,21 @@ export const UserStore = defineStore({
   state: () => {
     return {
       loggedInUser: {
-        name: "",
-        email: "",
-        uuid: "",
+        username: "",
+        password: "",
+        id: "",
       } as User,
       isLoggedIn: false,
     };
   },
   getters: {
     userName: (state) => {
-      return state.loggedInUser.name;
+      return state.loggedInUser.username;
     },
   },
   actions: {
-    create(name: string, email: string) {
-      userService.createUser(name, email).then((user) => {
-        console.log(user);
+    create(username: string, password: string) {
+      userService.createUser(username, password).then((user) => {
         this.loggedInUser = user;
         this.isLoggedIn = true;
       });
