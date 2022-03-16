@@ -11,23 +11,50 @@ provide("UserService", new UserService());
 
 <template>
   <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/CreateUser">Create user</RouterLink>
-        <RouterLink to="/Login">Log In</RouterLink>
-        <RouterLink to="/Logout">Log Out</RouterLink>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand">Omega Chat</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="!userStore.loggedIn">
+            <li class="nav-item">
+              <RouterLink to="/" class="nav-link">Home</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="/CreateUser" class="nav-link">Create User</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="/Login" class="nav-link">Log In</RouterLink>
+            </li>
+          </ul>
 
-        <p v-if="userStore.userName != undefined">
-          {{ "Logged in as: " + userStore.userName }}
-        </p>
-      </nav>
-    </div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" v-if="userStore.loggedIn">
+            <li class="nav-item">
+              <RouterLink to="/" class="nav-link">Home</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="/chatrooms" class="nav-link">Chat Rooms</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink to="/Logout" class="nav-link">Log Out</RouterLink>
+            </li>
+          </ul>
+
+          <span class="navbar-text" v-if="userStore.loggedIn">
+            Logged in as: {{ userStore.userName }}
+          </span>
+        </div>
+      </div>
+    </nav>
   </header>
-  <br />
-  <RouterView />
+  <div class="container">
+    <RouterView />
+  </div>
 </template>
 
+<!--
 <style>
 @import "@/assets/base.css";
 
@@ -125,3 +152,4 @@ nav a:first-of-type {
   }
 }
 </style>
+-->

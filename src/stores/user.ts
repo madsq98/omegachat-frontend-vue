@@ -20,17 +20,41 @@ export const UserStore = defineStore({
     userName: (state) => {
       return state.loggedInUser.username;
     },
+    passWord: (state) => {
+      return state.loggedInUser.password;
+    },
+    loggedIn: (state) => {
+      return state.isLoggedIn;
+    }
   },
   actions: {
-    create(username: string, password: string) {
-      userService.createUser(username, password).then((user) => {
-        this.loggedInUser = user;
-        this.isLoggedIn = true;
+    create(username: string, password: string): Promise<boolean> {
+      return new Promise<boolean>((resolve, reject) => {
+        let res = userService.createUser(username, password);
+
+        res.then(obj => {
+          resolve(true);
+        }, err => {
+          reject(false);
+        });
       });
     },
-    logIn(user: User) {
-      this.loggedInUser = user;
-      this.isLoggedIn = true;
+    logIn(user: User): Promise<boolean> {
+      return new Promise<boolean>((resolve, reject) => {
+        let res = userService.checkLogin(user.username, user.password);
+
+        res.then(obj => {
+          if(obj.id != 'null') {
+            this.loggedInUser = obj;
+            this.isLoggedIn = true;
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }, err => {
+          reject(false);
+        })
+      });
     },
     logOut() {
       this.loggedInUser = {} as User;
