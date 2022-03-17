@@ -19,4 +19,19 @@ export class ChatroomsService {
       return Promise.resolve([{id: '', title: '', owner: { id: '', username: '', password: ''}} as Chatroom]);
     }
   }
+
+  async getOneRoom(id: string): Promise<Chatroom> {
+    if(this.userStore.isLoggedIn) {
+      let authStr = btoa(this.userStore.userName + ':' + this.userStore.passWord);
+      const res = await http.get<Chatroom>("/chatrooms/"+id, {
+        headers: {
+          'Authorization': 'Basic ' + authStr
+        }
+      });
+
+      return res.data;
+    } else {
+      return Promise.resolve({id: '', title: '', owner: { id: '', username: '', password: ''}} as Chatroom);
+    }
+  }
 }
