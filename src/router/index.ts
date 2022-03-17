@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import LogoutView from "../views/LogoutView.vue";
 import ChatroomsView from "../views/ChatroomsView.vue";
+import JoinRoomView from "../views/JoinRoomView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,12 @@ const router = createRouter({
       path: "/chatrooms",
       name: "Chatrooms",
       component: ChatroomsView
+    },
+    {
+      path: "/joinRoom/:id",
+      name: "JoinRoom",
+      props: true,
+      component: JoinRoomView
     }
   ],
 });
